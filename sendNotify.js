@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 
 function sendNotify(text, content) {
   const token = process.env.PUSH_PLUS_TOKEN;
