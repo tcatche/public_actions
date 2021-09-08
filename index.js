@@ -3,9 +3,7 @@ const sendMail = require('./sendMail');
 const sendNotify = require('./sendNotify');
 
 const [cookie, user, pass, to, PUSH_PLUS_TOKEN] = process.argv.slice(2);
-console.log(process.argv.slice(2));
-process.env.user = user;
-process.env.pass = pass;
+process.env.PUSH_PLUS_TOKEN = PUSH_PLUS_TOKEN;
 let score = 0;
 
 const headers = {
