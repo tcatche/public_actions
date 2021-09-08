@@ -1,7 +1,9 @@
 const fetch = require('node-fetch');
 const sendMail = require('./sendMail');
+const sendNotify = require('./sendNotify');
 
-const [cookie, user, pass, to] = process.argv.slice(2);
+const [cookie, user, pass, to, ] = process.argv.slice(2);
+console.log(process.argv);
 process.env.user = user;
 process.env.pass = pass;
 let score = 0;
@@ -80,29 +82,21 @@ const drawFn = async () => {
   })
   .then((msg) => {
     console.log(msg);
-    return sendMail({
-      from: '掘金',
-      to,
-      subject: '定时任务',
-      html: `
+    return sendNotify('掘金自动签到成功', `
         <h1 style="text-align: center">自动签到通知</h1>
         <p style="text-indent: 2em">签到结果：${msg}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
       `
-    }).catch(console.error);
+    ).catch(console.error);
   })
   .then(() => {
-    console.log('邮件发送成功！');
+    console.log('通知发送成功！');
   })
   .catch((err) => {
-    sendMail({
-      from: '掘金',
-      to,
-      subject: '定时任务',
-      html: `
+    sendNotify('掘金自动签到失败', `
         <h1 style="text-align: center">自动签到通知</h1>
         <p style="text-indent: 2em">执行结果：${err}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
       `
-    }).catch(console.error);
+    ).catch(console.error);
   });
