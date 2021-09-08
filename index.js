@@ -85,10 +85,7 @@ const drawFn = async () => {
         <p style="text-indent: 2em">签到结果：${msg}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
       `
-    ).catch(console.error);
-  })
-  .then(() => {
-    console.log('通知发送成功！');
+    );
   })
   .catch((err) => {
     sendNotify('掘金自动签到失败', `
@@ -96,5 +93,5 @@ const drawFn = async () => {
         <p style="text-indent: 2em">执行结果：${err}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
       `
-    ).catch(console.error);
+    );
   });

@@ -17,18 +17,17 @@ function sendNotify(text, content) {
     }).then((res) => res.json()).then((data) => {
       console.log(data);
       if (data.code === 200) {
-        console.log(`push+发送通知消息完成。\n`)
-        return Promise.resolve(data);
+        console.log(`push+发送通知消息完成。\n`);
       } else {
-        return Promise.reject(`push+发送通知消息失败：${data.msg}\n`);
+        console.error(`push+发送通知消息失败：${data.msg}\n`);
       }
-      return Promise.resolve(data);
     }).catch((err) => {
       console.error(`push+发送通知消息失败！！\n`)
-      return Promise.reject(err);
-    }).finally;
+      console.error(err)
+    });
   } else {
-    return Promise.reject('您未提供push+推送所需的PUSH_PLUS_TOKEN，取消push+推送消息通知\n');
+    console.error('您未提供push+推送所需的PUSH_PLUS_TOKEN，取消push+推送消息通知\n')
+    return Promise.resolve();
   }
 }
 
