@@ -2,8 +2,8 @@ const fetch = require('node-fetch');
 const sendMail = require('./sendMail');
 const sendNotify = require('./sendNotify');
 
-const [cookie, user, pass, to, ] = process.argv.slice(2);
-console.log(process.argv);
+const [cookie, user, pass, to, PUSH_PLUS_TOKEN] = process.argv.slice(2);
+console.log(process.argv.slice(2));
 process.env.user = user;
 process.env.pass = pass;
 let score = 0;
