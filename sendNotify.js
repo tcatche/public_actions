@@ -5,7 +5,7 @@ function sendNotify(text, content, status) {
   const tokenErr = process.env.PUSH_PLUS_TOKEN_ERR;
   if (token) {
     content = content.replace(/[\n\r]/g, '<br>'); // 默认为html, 不支持plaintext
-    return fetch('http://www.pushplus.plus/send', {
+    return fetch('http://pushplus.hxtrip.com/send', {
       headers: {
         'Content-Type': ' application/json'
       },
