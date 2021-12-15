@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
 
-function sendNotify(text, content) {
+function sendNotify(text, content, status) {
   const token = process.env.PUSH_PLUS_TOKEN;
+  const tokenErr = process.env.PUSH_PLUS_TOKEN_ERR;
   if (token) {
     content = content.replace(/[\n\r]/g, '<br>'); // 默认为html, 不支持plaintext
     return fetch('http://www.pushplus.plus/send', {
@@ -9,7 +10,7 @@ function sendNotify(text, content) {
         'Content-Type': ' application/json'
       },
       body: JSON.stringify({
-        token,
+        token: status ? token : tokenErr || token,
         title: `${text}`,
         content:`${content}`,
       }),

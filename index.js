@@ -2,8 +2,9 @@ const fetch = require('node-fetch');
 const sendMail = require('./sendMail');
 const sendNotify = require('./sendNotify');
 
-const [cookie, user, pass, to, PUSH_PLUS_TOKEN] = process.argv.slice(2);
+const [cookie, PUSH_PLUS_TOKEN, PUSH_PLUS_TOKEN_ERR] = process.argv.slice(2);
 process.env.PUSH_PLUS_TOKEN = PUSH_PLUS_TOKEN;
+process.env.PUSH_PLUS_TOKEN_ERR = PUSH_PLUS_TOKEN_ERR;
 let score = 0;
 
 const headers = {
@@ -80,18 +81,24 @@ const drawFn = async () => {
   })
   .then((msg) => {
     console.log(msg);
-    return sendNotify('掘金自动签到成功', `
+    return sendNotify(
+      '掘金自动签到成功',
+      `
         <h1 style="text-align: center">自动签到通知</h1>
         <p style="text-indent: 2em">签到结果：${msg}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
-      `
+      `,
+      true,
     );
   })
   .catch((err) => {
-    sendNotify('掘金自动签到失败', `
+    sendNotify(
+      '掘金自动签到失败',
+      `
         <h1 style="text-align: center">自动签到通知</h1>
         <p style="text-indent: 2em">执行结果：${err}</p>
         <p style="text-indent: 2em">当前积分：${score}</p><br/>
-      `
+      `,
+      false,
     );
   });

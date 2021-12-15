@@ -30,8 +30,6 @@ jobs:
       - name: Run Project
         env:
           COOKIE: ${{ secrets.COOKIE }}
-          USER: ${{ secrets.USER }}
-          PASS: ${{ secrets.PASS }}
-          TO: ${{ secrets.TO }}
           PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
-        run: npm ci && node index.js "${COOKIE}" "${USER}" "${PASS}" "${TO}" "${PUSH_PLUS_TOKEN}"
+          PUSH_PLUS_TOKEN_ERR: ${{ secrets.PUSH_PLUS_TOKEN_ERR }}
+        run: npm ci && node index.js "${COOKIE}" "${PUSH_PLUS_TOKEN}"  "${PUSH_PLUS_TOKEN_ERR}"
